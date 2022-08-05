@@ -1,25 +1,27 @@
-require_relative '/tree.rb'
+require_relative './tree.rb'
 
 test = Tree.new(Array.new(15) {rand(1..100)})
 
-puts "The tree is balanced!" if test.balanced?
+p test
 
-p test.level_order_iterative
-p test.level_order_recursive
-p test.preorder
-p test.postorder
-p test.inorder
+# puts "The tree is balanced!" if test.balanced?
 
-15.times {|i| self.insert(rand(101..200) + i)}
+# p test.level_order_iterative
+# p test.level_order_recursive
+# p test.preorder
+# p test.postorder
+# p test.inorder
 
-puts "You unbalanced the tree!" unless test.balanced?
+# 15.times {|i| self.insert(rand(101..200) + i)}
 
-test.rebalance
+# puts "You unbalanced the tree!" unless test.balanced?
 
-puts "You rebalanced the tree!" if test.balanced?
+# test.rebalance
 
-p test.level_order_iterative
-p test.level_order_recursive
-p test.preorder
-p test.postorder
-p test.inorder
+# puts "You rebalanced the tree!" if test.balanced?
+
+# p test.level_order_iterative
+# p test.level_order_recursive
+# p test.preorder
+# p test.postorder
+# p test.inorder
