@@ -10,22 +10,15 @@ class Tree
         @root = self.build_tree(sorted_array)
     end
 
-    # creates balanced binary tree of node objects with data from array
     def build_tree(array, start = 0, last = array.length - 1)
-        return nil if last < 0
-        return nil if start > array.length - 1
-        # make middle value of the array = root - do this recursively to make the whole tree
+        return nil if last < 0 || start > last
+        # make middle value of the array the data for this node
         mid_index = (start + last) / 2
         data = array[mid_index]
-        p start
-        p last
-        p data
-        # make middle of left half left child of root
+        # make middle of left half left child of this node
         l_child = build_tree(array, start, mid_index - 1)
-        p l_child
-        # make middle of right half right child of root
+        # make middle of right half right child of this node
         r_child = build_tree(array, mid_index + 1, last)
-        # return the root node
         Node.new(data, l_child, r_child)
     end
 
