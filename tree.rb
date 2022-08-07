@@ -13,7 +13,7 @@ class Tree
     # creates balanced binary tree of node objects with data from array
     def build_tree(array, start = 0, last = array.length - 1)
         return nil if last < 0
-        return nil if start > array.length - 1
+        return nil if start == last
         # make middle value of the array = root - do this recursively to make the whole tree
         mid_index = (start + last) / 2
         data = array[mid_index]
