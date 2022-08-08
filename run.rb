@@ -2,7 +2,7 @@ require_relative './tree.rb'
 
 test = Tree.new(Array.new(15) {rand(1..100)})
 
-p test
+test.pretty_print
 
 # puts "The tree is balanced!" if test.balanced?
 

@@ -2,11 +2,8 @@ require_relative './node.rb'
 
 class Tree
     def initialize(array)
-        p array
         no_dups = array.uniq
-        p no_dups
         sorted_array = no_dups.sort
-        p sorted_array
         @root = self.build_tree(sorted_array)
     end
 
@@ -30,10 +27,11 @@ class Tree
         
     end
 
-    def find(value)
-       
-        # return node with that value
-        node
+    def find(value, node = @root)
+        return node if node.data == value
+        l_data = find(value, node.l_child) unless node.l_child == nil
+        r_data = find(value, node.r_child) unless node.r_child == nil
+        l_data == nil ? r_data : l_data
     end
 
     def level_order_iterative
@@ -97,8 +95,8 @@ class Tree
     end
 
     def pretty_print(node = @root, prefix = '', is_left = true)
-        pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+        pretty_print(node.r_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.r_child
         puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-        pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
+        pretty_print(node.l_child, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.l_child
       end
 end
