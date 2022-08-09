@@ -12,7 +12,9 @@ test.pretty_print
 # p test.postorder
 # p test.inorder
 
-# 15.times {|i| self.insert(rand(101..200) + i)}
+15.times {|i| test.insert(rand(101..200) + i)}
+
+test.pretty_print
 
 # puts "You unbalanced the tree!" unless test.balanced?
 

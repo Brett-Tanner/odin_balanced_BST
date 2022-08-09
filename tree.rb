@@ -19,16 +19,19 @@ class Tree
         Node.new(data, l_child, r_child)
     end
 
-    def insert(value)
+    def insert(value, node = @root) # TODO: these use the same block to traverse, some way to abstract that??
         return puts "#{value} already exists in this tree" if find(value)
-
+        insert(value, node.l_child) if value < node.data && node.l_child != nil
+        insert(value, node.r_child) if value > node.data && node.r_child != nil
+        node.l_child = Node.new(value) if value < node.data && node.l_child == nil
+        node.r_child = Node.new(value) if value > node.data && node.r_child == nil
     end
 
     def delete(value)
         
     end
 
-    def find(value, node = @root)
+    def find(value, node = @root) # TODO: these use the same block to traverse, some way to abstract that??
         return node if node.data == value
         return find(value, node.l_child) if value < node.data && node.l_child != nil
         return find(value, node.r_child) if value > node.data && node.r_child != nil
