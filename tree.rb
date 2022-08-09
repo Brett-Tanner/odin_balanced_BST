@@ -22,15 +22,15 @@ class Tree
         Node.new(data, l_child, r_child)
     end
 
-    def insert(value, node = @root) # TODO: these use the same block to traverse, some way to abstract that??
+    def insert(value, node = @root)
         return puts "#{value} already exists in this tree" if find(value)
-        insert(value, node.l_child) if node > value && node.l_child != nil
-        insert(value, node.r_child) if node < value && node.r_child != nil
+        insert(value, node.l_child) if go_left?(node, value)
+        insert(value, node.r_child) if go_right?(node, value)
         node.l_child = Node.new(value) if node > value && node.l_child == nil
         node.r_child = Node.new(value) if node < value && node.r_child == nil
     end
 
-    def delete(value, node = @root, parent = nil) # TODO: these use the same block to traverse, some way to abstract that??
+    def delete(value, node = @root, parent = nil)
         if node == value
             p value
             case node.child_count
@@ -49,8 +49,16 @@ class Tree
                 exit(1)
             end
         end
-        delete(value, node.l_child, node) if node > value && node.l_child != nil
-        delete(value, node.r_child, node) if node < value && node.r_child != nil
+        delete(value, node.l_child, node) if go_left?(node, value)
+        delete(value, node.r_child, node) if go_right?(node, value)
+    end
+
+    def go_left?(node, value)
+        node > value && node.l_child != nil
+    end
+
+    def go_right?(node, value)
+        node < value && node.r_child != nil
     end
 
     def min_child(node)
@@ -58,10 +66,10 @@ class Tree
         min_child(node.l_child)
     end
 
-    def find(value, node = @root) # TODO: these use the same block to traverse, some way to abstract that??
+    def find(value, node = @root)
         node if node == value
-        find(value, node.l_child) if node > value && node.l_child != nil
-        find(value, node.r_child) if node < value && node.r_child != nil
+        find(value, node.l_child) if go_left?(node, value)
+        find(value, node.r_child) if go_right?(node, value)
     end
 
     def level_order_iterative
