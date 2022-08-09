@@ -30,16 +30,38 @@ class Tree
         node.r_child = Node.new(value) if node < value && node.r_child == nil
     end
 
-    def delete(value, node = @root)
-        if node
-            
+    def delete(value, node = @root, parent = nil) # TODO: these use the same block to traverse, some way to abstract that??
+        if node == value
+            p value
+            case node.child_count
+            when 0
+                return parent.l_child = nil if node < parent
+                return parent.r_child = nil if node > parent
+            when 1
+                parent.l_child = node.only_child if node < parent
+                parent.r_child = node.only_child if node > parent
+            when 2
+                succ_data = min_child(node.r_child).data
+                delete(succ_data)
+                node.data = succ_data
+            else
+                puts "Unexpected child count"
+                exit(1)
+            end
         end
+        delete(value, node.l_child, node) if node > value && node.l_child != nil
+        delete(value, node.r_child, node) if node < value && node.r_child != nil
+    end
+
+    def min_child(node)
+        return node if node.l_child == nil
+        min_child(node.l_child)
     end
 
     def find(value, node = @root) # TODO: these use the same block to traverse, some way to abstract that??
-        return node if node == value
-        return find(value, node.l_child) if node > value && node.l_child != nil
-        return find(value, node.r_child) if node < value && node.r_child != nil
+        node if node == value
+        find(value, node.l_child) if node > value && node.l_child != nil
+        find(value, node.r_child) if node < value && node.r_child != nil
     end
 
     def level_order_iterative
@@ -90,6 +112,7 @@ class Tree
     end
 
     def depth(node)
+        
         # depth is the number of edges in the path to the root node from node
         depth
     end
