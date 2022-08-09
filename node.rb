@@ -1,6 +1,14 @@
 class Node
 
-    # TODO: include comparable module so I can compare nodes by data??
+    include Comparable
+
+    def <=>(other)
+        if other.class == Node
+            self.data <=> other.data
+        else
+            self.data <=> other
+        end
+    end
 
     attr_accessor :data, :l_child, :r_child
 

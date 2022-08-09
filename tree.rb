@@ -1,6 +1,9 @@
 require_relative './node.rb'
 
 class Tree
+
+    attr_accessor :root
+
     def initialize(array)
         no_dups = array.uniq
         sorted_array = no_dups.sort
@@ -21,20 +24,22 @@ class Tree
 
     def insert(value, node = @root) # TODO: these use the same block to traverse, some way to abstract that??
         return puts "#{value} already exists in this tree" if find(value)
-        insert(value, node.l_child) if value < node.data && node.l_child != nil
-        insert(value, node.r_child) if value > node.data && node.r_child != nil
-        node.l_child = Node.new(value) if value < node.data && node.l_child == nil
-        node.r_child = Node.new(value) if value > node.data && node.r_child == nil
+        insert(value, node.l_child) if node > value && node.l_child != nil
+        insert(value, node.r_child) if node < value && node.r_child != nil
+        node.l_child = Node.new(value) if node > value && node.l_child == nil
+        node.r_child = Node.new(value) if node < value && node.r_child == nil
     end
 
-    def delete(value)
-        
+    def delete(value, node = @root)
+        if node
+            
+        end
     end
 
     def find(value, node = @root) # TODO: these use the same block to traverse, some way to abstract that??
-        return node if node.data == value
-        return find(value, node.l_child) if value < node.data && node.l_child != nil
-        return find(value, node.r_child) if value > node.data && node.r_child != nil
+        return node if node == value
+        return find(value, node.l_child) if node > value && node.l_child != nil
+        return find(value, node.r_child) if node < value && node.r_child != nil
     end
 
     def level_order_iterative
