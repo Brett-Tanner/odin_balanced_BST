@@ -20,7 +20,8 @@ class Tree
     end
 
     def insert(value)
-        # check the value is not already in the tree, duplicates are hard
+        return puts "#{value} already exists in this tree" if find(value)
+
     end
 
     def delete(value)
@@ -29,9 +30,8 @@ class Tree
 
     def find(value, node = @root)
         return node if node.data == value
-        l_data = find(value, node.l_child) unless node.l_child == nil
-        r_data = find(value, node.r_child) unless node.r_child == nil
-        l_data == nil ? r_data : l_data
+        return find(value, node.l_child) if value < node.data && node.l_child != nil
+        return find(value, node.r_child) if value > node.data && node.r_child != nil
     end
 
     def level_order_iterative
