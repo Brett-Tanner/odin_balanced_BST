@@ -32,7 +32,6 @@ class Tree
 
     def delete(value, node = @root, parent = nil)
         if node == value
-            p value
             case node.child_count
             when 0
                 return parent.l_child = nil if node < parent
@@ -81,13 +80,15 @@ class Tree
         values_array
     end
 
-    def level_order_recursive
-        # traverses the tree breadth-first (remember we use queues for this)
-        # accepts a block and yields each node to the block
-        yield(node)
-        
+    def level_order(node = @root, queue = [], values_array = [], &block)
+        queue.shift
+        yield(node) if block_given?
+        queue << node.l_child unless node.l_child == nil
+        queue << node.r_child unless node.r_child == nil
         # return an array of all the values if no block is provided
-        values_array
+        values_array << node.data
+        return values_array if queue.empty?
+        level_order(queue[0], queue, values_array, &block)
     end
 
     def inorder

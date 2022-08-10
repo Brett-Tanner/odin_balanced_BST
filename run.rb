@@ -4,10 +4,11 @@ test = Tree.new(Array.new(15) {rand(1..100)})
 
 test.pretty_print
 
+
 # puts "The tree is balanced!" if test.balanced?
 
 # p test.level_order_iterative
-# p test.level_order_recursive
+p test.level_order
 # p test.preorder
 # p test.postorder
 # p test.inorder
@@ -23,7 +24,7 @@ test.pretty_print
 # puts "You rebalanced the tree!" if test.balanced?
 
 # p test.level_order_iterative
-# p test.level_order_recursive
+p test.level_order
 # p test.preorder
 # p test.postorder
 # p test.inorder
