@@ -72,11 +72,15 @@ class Tree
     end
 
     def level_order_iterative
-        # traverses the tree breadth-first (remember we use queues for this)
-        # accepts a block and yields each node to the block
-        yield(node)
-
-        # return an array of all the values if no block is provided
+        values_array = []
+        queue = [@root]
+        while !queue.empty?
+            yield(queue[0]) if block_given?
+            values_array << queue[0].data
+            queue << queue[0].l_child unless queue[0].l_child == nil
+            queue << queue[0].r_child unless queue[0].r_child == nil
+            queue.shift
+        end
         values_array
     end
 

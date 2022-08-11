@@ -6,7 +6,7 @@ test.pretty_print
 
 # puts "The tree is balanced!" if test.balanced?
 
-# p test.level_order_iterative
+test.level_order_iterative
 test.level_order
 test.inorder
 test.preorder
@@ -20,7 +20,7 @@ test.postorder
 
 # puts "You rebalanced the tree!" if test.balanced?
 
-# p test.level_order_iterative
+test.level_order_iterative
 test.level_order
 test.inorder
 test.preorder
