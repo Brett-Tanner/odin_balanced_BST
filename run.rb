@@ -10,7 +10,7 @@ test.pretty_print
 test.level_order
 test.inorder
 test.preorder
-# p test.postorder
+test.postorder
 
 15.times {|i| test.insert(rand(101..200) + i)}
 
@@ -24,4 +24,4 @@ test.preorder
 test.level_order
 test.inorder
 test.preorder
-# p test.postorder
+test.postorder
