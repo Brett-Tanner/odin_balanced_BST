@@ -52,6 +52,12 @@ class Tree
         delete(value, node.r_child, node) if go_right?(node, value)
     end
 
+    def find(value, node = @root)
+        return node if node == value
+        find(value, node.l_child) if go_left?(node, value)
+        find(value, node.r_child) if go_right?(node, value)
+    end
+
     def go_left?(node, value)
         node > value && node.l_child != nil
     end
@@ -63,12 +69,6 @@ class Tree
     def min_child(node)
         return node if node.l_child == nil
         min_child(node.l_child)
-    end
-
-    def find(value, node = @root)
-        node if node == value
-        find(value, node.l_child) if go_left?(node, value)
-        find(value, node.r_child) if go_right?(node, value)
     end
 
     def level_order_iterative
@@ -89,7 +89,6 @@ class Tree
         yield(node) if block_given?
         queue << node.l_child unless node.l_child == nil
         queue << node.r_child unless node.r_child == nil
-        # return an array of all the values if no block is provided
         values_array << node.data
         return values_array if queue.empty?
         level_order(queue[0], queue, values_array, &block)
@@ -133,7 +132,7 @@ class Tree
         pretty_print(node.l_child, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.l_child
     end
 
-    # private
+    private
 
     def height(node)
         return 0 if node.leaf?
@@ -143,9 +142,10 @@ class Tree
         height += 1
     end
 
-    def depth(node)
-        
-        # depth is the number of edges in the path to the root node from node
-        depth
+    def depth(to, from = @root, depth = 0)
+        return depth if from == to
+        depth += 1
+        depth(to, from.l_child, depth) if go_left?(from, to)
+        depth(to, from.r_child, depth) if go_right?(from, to)
     end
 end
