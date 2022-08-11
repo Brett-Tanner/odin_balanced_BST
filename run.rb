@@ -13,9 +13,9 @@ p test.level_order
 # p test.postorder
 p test.inorder
 
-15.times {|i| test.insert(rand(101..200) + i)}
+# 15.times {|i| test.insert(rand(101..200) + i)}
 
-test.pretty_print
+# test.pretty_print
 
 # puts "You unbalanced the tree!" unless test.balanced?
 
@@ -24,7 +24,7 @@ test.pretty_print
 # puts "You rebalanced the tree!" if test.balanced?
 
 # p test.level_order_iterative
-p test.level_order
+# p test.level_order
 # p test.preorder
 # p test.postorder
 # p test.inorder

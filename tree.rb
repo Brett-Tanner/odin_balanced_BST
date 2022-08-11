@@ -91,24 +91,11 @@ class Tree
         level_order(queue[0], queue, values_array, &block)
     end
 
-    def inorder(node = @root, values_array = [])
-        inorder(node.l_child, values_array) unless node.l_child == nil
-        # traverses left, then parent, then right
-        if node.l_child.leaf?
-            yield(node.l_child) if block_given?
-            values_array << node.l_child.data
-            yield(node) if block_given?
-            values_array << node.data
-            yield(node.r_child) if block_given?
-            values_array << node.r_child.data
-        else
-            yield(node) if block_given?
-            values_array << node.data
-            yield(node.r_child) if block_given?
-            values_array << node.r_child.data
-        end
-        inorder(node.r_child, values_array)
-        # return an array of all the values if no block is provided
+    def inorder(node = @root, values_array = [], &block)
+        inorder(node.l_child, values_array, &block) unless node.l_child == nil
+        yield(node) if block_given?
+        values_array << node.data
+        inorder(node.r_child, values_array, &block) unless node.r_child == nil
         values_array
     end
 
