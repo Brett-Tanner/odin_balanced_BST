@@ -99,10 +99,12 @@ class Tree
         values_array
     end
 
-    def preorder
+    def preorder(node = @root, values_array = [], &block)
         # traverses parent, then left, then right
-        yield(node)
-
+        yield(node) if block_given?
+        values_array << node.data
+        preorder(node.l_child, values_array, &block) unless node.l_child == nil
+        preorder(node.r_child, values_array, &block) unless node.r_child == nil
         # return an array of all the values if no block is provided
         values_array
     end
