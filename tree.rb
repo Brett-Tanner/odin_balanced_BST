@@ -119,17 +119,6 @@ class Tree
         values_array
     end
 
-    def height(node)
-        # height is the number of edges in the longest path from node to a leaf node
-        height
-    end
-
-    def depth(node)
-        
-        # depth is the number of edges in the path to the root node from node
-        depth
-    end
-
     def balanced?
         # a tree is balanced if the difference in heights between the left and right subtree of every node is 1 or less
     end
@@ -142,5 +131,21 @@ class Tree
         pretty_print(node.r_child, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.r_child
         puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
         pretty_print(node.l_child, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.l_child
-      end
+    end
+
+    # private
+
+    def height(node)
+        return 0 if node.leaf?
+        l_height = node.l_child == nil ? 0 : height(node.l_child) 
+        r_height = node.r_child == nil ? 0 : height(node.r_child) 
+        height = [l_height, r_height].max
+        height += 1
+    end
+
+    def depth(node)
+        
+        # depth is the number of edges in the path to the root node from node
+        depth
+    end
 end
