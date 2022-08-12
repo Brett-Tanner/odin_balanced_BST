@@ -118,8 +118,14 @@ class Tree
         values_array
     end
 
-    def balanced?
-        # a tree is balanced if the difference in heights between the left and right subtree of every node is 1 or less
+    def balanced?(node = @root)
+        l_height = node.l_child ? height(node.l_child) : 0
+        r_height = node.r_child ? height(node.r_child) : 0
+        height_diff = l_height - r_height
+        return false if height_diff > 1 || height_diff < -1
+        balanced?(node.l_child) unless node.l_child == nil || node.l_child.leaf?
+        balanced?(node.r_child) unless node.r_child == nil || node.r_child.leaf?
+        true
     end
 
     def rebalance

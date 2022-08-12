@@ -4,7 +4,7 @@ test = Tree.new(Array.new(15) {rand(1..100)})
 
 test.pretty_print
 
-# puts "The tree is balanced!" if test.balanced?
+puts "The tree is balanced!" if test.balanced?
 
 test.level_order_iterative
 test.level_order
@@ -14,7 +14,9 @@ test.postorder
 
 15.times {|i| test.insert(rand(101..200) + i)}
 
-# puts "You unbalanced the tree!" unless test.balanced?
+test.pretty_print
+
+puts "You unbalanced the tree!" unless test.balanced?
 
 # test.rebalance
 
