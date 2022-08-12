@@ -129,7 +129,8 @@ class Tree
     end
 
     def rebalance
-        # do this by traversing the tree to provide a new array to #build_tree
+        sorted_array = inorder()
+        @root = build_tree(sorted_array)
     end
 
     def pretty_print(node = @root, prefix = '', is_left = true)
