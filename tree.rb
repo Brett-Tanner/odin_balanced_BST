@@ -23,7 +23,7 @@ class Tree
     end
 
     def insert(value, node = @root)
-        return puts "#{value} already exists in this tree" if find(value)
+        return puts "You can't insert #{value}, it's in the tree" if find(value)
         insert(value, node.l_child) if go_left?(node, value)
         insert(value, node.r_child) if go_right?(node, value)
         node.l_child = Node.new(value) if node > value && node.l_child == nil
